@@ -4,6 +4,7 @@
 
 void displayMenu() 
 {
+  
     printf("\n╔═══════════ Calculator ══════════╗\n");
     printf("║  1. Addition       (+)          ║\n");
     printf("║  2. Subtraction    (-)          ║\n");
@@ -43,27 +44,27 @@ int main()
         printf("Enter second number: ");
         scanf("%lf", &num2);
 
-        printf("\n╔═══════ Calculation Result ═══════╗\n");
+        printf("\n╔═══════ Calculation Result ══════╗\n");
         switch (choice)
          {
             case 1:
                 result = num1 + num2;
-                printf("║  %.2lf + %.2lf = %.2lf          ║\n", num1, num2, result);
+                printf("║  %.2lf + %.2lf = %.2lf           ║\n", num1, num2, result);
                 break;
             case 2:
                 result = num1 - num2;
-                printf("║  %.2lf - %.2lf = %.2lf          ║\n", num1, num2, result);
+                printf("║  %.2lf - %.2lf = %.2lf           ║\n", num1, num2, result);
                 break;
             case 3:
                 result = num1 * num2;
-                printf("║  %.2lf × %.2lf = %.2lf          ║\n", num1, num2, result);
+                printf("║  %.2lf × %.2lf = %.2lf           ║\n", num1, num2, result);
                 break;
             case 4:
                 if (num2 == 0) {
                     printf("║  Error: Division by zero! ❌     ║\n");
                 } else {
                     result = num1 / num2;
-                    printf("║  %.2lf ÷ %.2lf = %.2lf          ║\n", num1, num2, result);
+                    printf("║  %.2lf ÷ %.2lf = %.2lf            ║\n", num1, num2, result);
                 }
                 break;
         }
