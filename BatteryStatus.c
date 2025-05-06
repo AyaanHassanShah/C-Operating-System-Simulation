@@ -1,61 +1,55 @@
 #include <windows.h>
 #include <stdio.h>
-#include <conio.h>
+#include <stdlib.h>
+#include <unistd.h>  // for sleep()
 
-void moveCursor(int x, int y) {
-    printf("\033[%d;%dH", y, x);
-}
-
-void showBatteryBar(int level) 
-{
-    printf("\n╔══════════ Battery Status ══════════╗\n");
-    printf("║ Level: [");
-    
+void showBatteryBar(int level) {
     int blocks = level / 10;
-    for(int i = 0; i < 10; i++) {
-        printf(i < blocks ? "█" : "░");
+
+    printf("🔋 Battery: [");
+    for (int i = 0; i < blocks; i++) {
+        printf("█");
     }
-    printf("] %3d%% ║\n", level);
-    printf("╚═══════════════════════════════════╝\n");
+    for (int i = blocks; i < 10; i++) {
+        printf(" ");
+    }
+    printf("] %d%%\n", level);
 }
 
-int main() 
-{
+int main() {
     SYSTEM_POWER_STATUS status;
-    int timeLeft = 10;
-    DWORD lastTime = GetTickCount();
 
-    // Initial screen setup
-    system("cls");
-    printf("\033[?25l");  // Hide cursor
+    while (1) {
+        system("cls");  // clear console
 
-    while (timeLeft > 0) 
-    {
-        moveCursor(0, 0);
-        printf("Battery Monitor (%d seconds)\n", timeLeft);
+        printf("╔════════════════════════════════════════╗\n");
+        printf("║    🎯 Live Battery Monitor (Windows)   ║\n");
+        printf("╚════════════════════════════════════════╝\n\n");
 
-        if (GetSystemPowerStatus(&status)) 
-        {
+        if (GetSystemPowerStatus(&status)) {
             int batteryLevel = status.BatteryLifePercent;
-            if (batteryLevel != 255) 
-            {
+
+            if (batteryLevel != 255) {  // 255 means unknown
                 showBatteryBar(batteryLevel);
-                printf("\nStatus: %s", 
-                    status.ACLineStatus == 1 ? "🔌 Charging" : "🔋 Battery");
+
+                if (status.ACLineStatus == 1)
+                    printf("\n⚡ Status: 🔌 Charging\n");
+                else if (status.ACLineStatus == 0)
+                    printf("\n⚡ Status: 🔋 Discharging\n");
+                else
+                    printf("\n⚡ Status: ❓ Unknown\n");
+
+            } else {
+                printf("❌ Battery information not available.\n");
             }
+        } else {
+            printf("❌ Failed to get power status.\n");
         }
 
-        if (GetTickCount() - lastTime >= 1000) 
-        {
-            timeLeft--;
-            lastTime = GetTickCount();
-        }
-
-        if (_kbhit() && _getch() == 27) break;  // ESC to exit
-
-        Sleep(100);
+        sleep(2); // 2 second delay
     }
 
-    printf("\033[?25h");  // Show cursor
     return 0;
 }
+
+
