@@ -1,26 +1,26 @@
 #include <stdio.h>
+#include <string.h>
 
 #define SIZE 3
 
 void printBoard(char board[SIZE][SIZE]) 
 {
-    printf("\n");
+    printf("\n    1   2   3\n");
     for (int i = 0; i < SIZE; i++) 
     {
+        printf("  -------------\n");
+        printf("%d ", i + 1);
         for (int j = 0; j < SIZE; j++) 
         {
-            printf(" %c ", board[i][j]);
-            if (j < SIZE - 1) printf("|");
+            printf("| %c ", board[i][j]);
         }
-        printf("\n");
-        if (i < SIZE - 1) printf("---|---|---\n");
+        printf("|\n");
     }
-    printf("\n");
+    printf("  -------------\n");
 }
 
 int checkWinner(char board[SIZE][SIZE]) 
 {
-    // Check rows and columns
     for (int i = 0; i < SIZE; i++) 
     {
         if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ')
@@ -28,12 +28,12 @@ int checkWinner(char board[SIZE][SIZE])
         if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' ')
             return board[0][i];
     }
-    // Check diagonals
+
     if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ')
         return board[0][0];
     if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ')
         return board[0][2];
-    // No winner
+
     return 0;
 }
 
@@ -56,41 +56,61 @@ void playGame()
         {' ', ' ', ' '},
         {' ', ' ', ' '}
     };
-    char currentPlayer = 'X';
+    char player1[50], player2[50];
+    char currentPlayerSymbol = 'X';
+    char currentPlayerName[50];
     int row, col, winner = 0;
+
+    printf("Enter Player 1 name: ");
+    scanf("%s", player1);
+    printf("Enter Player 2 name: ");
+    scanf("%s", player2);
+
+    printf("\n╔════════════════════════════════════════════╗\n");
+    printf("║ 🎮 %s is 'X'  vs  %s is 'O'           ║\n", player1, player2);
+    printf("╚════════════════════════════════════════════╝\n");
 
     while (!winner && !isDraw(board)) 
     {
         printBoard(board);
-        printf("Player %c, enter your move (row and column): ", currentPlayer);
+        strcpy(currentPlayerName, (currentPlayerSymbol == 'X') ? player1 : player2);
+
+        printf("\n%s (%c), enter your move (row column): ", currentPlayerName, currentPlayerSymbol);
         scanf("%d %d", &row, &col);
 
         if (row >= 1 && row <= SIZE && col >= 1 && col <= SIZE && board[row - 1][col - 1] == ' ') 
         {
-            board[row - 1][col - 1] = currentPlayer;
+            board[row - 1][col - 1] = currentPlayerSymbol;
             winner = checkWinner(board);
-            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+            currentPlayerSymbol = (currentPlayerSymbol == 'X') ? 'O' : 'X';
         } 
         else 
         {
-            printf("Invalid move. Try again.\n");
+            printf("\n❌ Invalid move! Please try again.\n");
         }
     }
 
     printBoard(board);
+
+    printf("\n╔════════════════════════════════════╗\n");
     if (winner) 
     {
-        printf("Player %c wins!\n", winner);
+        strcpy(currentPlayerName, (winner == 'X') ? player1 : player2);
+        printf("║ 🎉 %s wins the game! 🏆          ║\n", currentPlayerName);
     } 
     else 
     {
-        printf("It's a draw!\n");
+        printf("║ 🤝 It's a draw! Well played both!  ║\n");
     }
+    printf("╚════════════════════════════════════╝\n");
 }
 
 int main() 
 {
-    printf("Welcome to Tic Tac Toe!\n");
+    printf("╔════════════════════════════════════╗\n");
+    printf("║      🧠 Welcome to Tic Tac Toe     ║\n");
+    printf("╚════════════════════════════════════╝\n");
+
     playGame();
     return 0;
 }
