@@ -13,44 +13,45 @@ void printCalendar(int month, int year)
     
     int days[] = {31,28,31,30,31,30,31,31,30,31,30,31};
     
+    // Adjust for leap years
     if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
         days[1] = 29;
         
-    // Get first day of month
+    // Get the first day of the month
     struct tm firstDay = {0};
     firstDay.tm_year = year - 1900;
     firstDay.tm_mon = month - 1;
     firstDay.tm_mday = 1;
     mktime(&firstDay);
     
-    printf("\n╔══════════ %s %d ══════════╗\n", months[month-1], year);
-    printf("║ Sun Mon Tue Wed Thu Fri Sat ║\n");
-    printf("║");
+    // Print Calendar Header
+    printf("\n═══════════════════ %s %d ══════════════════\n", months[month-1], year);
+    printf("    Sun   Mon   Tue   Wed   Thu   Fri   Sat  \n");
     
-    // Print leading spaces
+    // Print leading spaces for the first day of the month
     for(int i = 0; i < firstDay.tm_wday; i++)
-        printf("    ");
+        printf("      ");
     
-    // Print days
+    // Print days of the month
     for(int i = 1; i <= days[month-1]; i++) 
     {
-        printf("%3d ", i);
-        if((i + firstDay.tm_wday) % 7 == 0 && i != days[month-1])
-            printf("║\n║");
+        printf("%6d", i); // Adjusted spacing for better alignment
+        if((i + firstDay.tm_wday) % 7 == 0) // Start a new line every Saturday
+            printf("\n");
     }
     
-    // Print trailing spaces
+    // Print trailing spaces if needed
     int lastDay = (days[month-1] + firstDay.tm_wday) % 7;
     if(lastDay != 0)
         for(int i = 0; i < (7 - lastDay); i++)
-            printf("    ");
+            printf("      ");
             
-    printf("║\n╚══════════════════════════════╝\n");
+    printf("\n═════════════════════════════════════════════\n");
 }
 
 int main() 
 {
-    // Get current time
+    // Get the current time
     time_t now = time(NULL);
     struct tm *currentTime = localtime(&now);
     
@@ -58,9 +59,9 @@ int main()
     int currentYear = currentTime->tm_year + 1900;
     
     system("cls");
-    printf("\nSystem Calendar\n");
+    printf("\n              System Calendar\n");
     
-    // Print current month
+    // Print the current month
     printCalendar(currentMonth, currentYear);
     
     // Allow viewing next/previous months
@@ -103,7 +104,7 @@ int main()
                 case 27: // ESC
                     return 0;
             }
-            printf("\nControls: N-Next Month, P-Previous Month, ESC-Exit\n");
+            printf("\nControls: N - Next Month, P - Previous Month, ESC - Exit\n");
         }
     }
     
