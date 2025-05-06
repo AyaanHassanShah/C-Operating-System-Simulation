@@ -41,24 +41,29 @@ void show_task_menu()
     while (1) 
     {
         printf("\n╔═══════════ Available Tasks ════════════╗\n");
-        printf("║  1. Calculator                         ║\n");
-        printf("║  2. Alarm Clock                        ║\n");
-        printf("║  3. Countdown Timer                    ║\n");
-        printf("║  4. Mini File Explorer                 ║\n");
-        printf("║  5. Notepad                            ║\n");
-        printf("║  6. Simple Task Manager                ║\n");
-        printf("║  7. Temperature Converter              ║\n");
-        printf("║  8. Tic Tac Toe                        ║\n");
-        printf("║  9. To-Do List                         ║\n");
-        printf("║ 10. Typing Speed Test                  ║\n");
-        printf("║ 11. Show Running Tasks                 ║\n");
+        printf("║  1. Alarm Clock                        ║\n");
+        printf("║  2. Battery Status                     ║\n");
+        printf("║  3. Calculator                         ║\n");
+        printf("║  4. Calendar                           ║\n");
+        printf("║  5. Chrome                             ║\n");
+        printf("║  6. Countdown Timer                    ║\n");
+        printf("║  7. Mini File Explorer                 ║\n");
+        printf("║  8. Notepad                            ║\n");
+        printf("║  9. Simple Task Manager                ║\n");
+        printf("║ 10. Snake Game                         ║\n");
+        printf("║ 11. Temperature Converter              ║\n");
+        printf("║ 12. Tic Tac Toe                        ║\n");
+        printf("║ 13. Todo List                          ║\n");
+        printf("║ 14. Typing Speed Test                  ║\n");
+        printf("║ 15. XOR Cipher                         ║\n");
+        printf("║ 16. Show Running Tasks                 ║\n");
         printf("║  0. Exit to Main Menu                  ║\n");
         printf("╚════════════════════════════════════════╝\n");
         printf("Choice: ");
         scanf("%d", &choice);
 
         if (choice == 0) break;
-        if (choice == 11) 
+        if (choice == 16) 
         {
             Display_PCBs();
             continue;
@@ -69,16 +74,21 @@ void show_task_menu()
 
         switch (choice) 
         {
-            case 1: launch_task("Calculator", mem); break;
-            case 2: launch_task("AlarmClock", mem); break;
-            case 3: launch_task("CountdownTimer", mem); break;
-            case 4: launch_task("MiniFileExplorer", mem); break;
-            case 5: launch_task("Notepad", mem); break;
-            case 6: launch_task("SimpleTaskManager", mem); break;
-            case 7: launch_task("TemperatureConverter", mem); break;
-            case 8: launch_task("TicTacToe", mem); break;
-            case 9: launch_task("TodoList", mem); break;
-            case 10: launch_task("TypingSpeed", mem); break;
+            case 1: launch_task("AlarmClock", mem); break;
+            case 2: launch_task("BatteryStatus", mem); break;
+            case 3: launch_task("Calculator", mem); break;
+            case 4: launch_task("Calendar", mem); break;
+            case 5: launch_task("Chrome", mem); break;
+            case 6: launch_task("CountdownTimer", mem); break;
+            case 7: launch_task("MiniFileExplorer", mem); break;
+            case 8: launch_task("Notepad", mem); break;
+            case 9: launch_task("SimpleTaskManager", mem); break;
+            case 10: launch_task("SnakeGame", mem); break;
+            case 11: launch_task("TemperatureConverter", mem); break;
+            case 12: launch_task("TicTacToe", mem); break;
+            case 13: launch_task("TodoList", mem); break;
+            case 14: launch_task("TypingSpeed", mem); break;
+            case 15: launch_task("Xor_Cipher", mem); break;
             default: printf("Invalid choice!\n");
         }
     }
