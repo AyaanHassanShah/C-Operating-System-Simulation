@@ -3,52 +3,74 @@
 void celsiusToFahrenheit() 
 {
     double celsius, fahrenheit;
-    printf("Enter temperature in Celsius: ");
+    printf("\nEnter temperature in Celsius: ");
     scanf("%lf", &celsius);
     fahrenheit = (celsius * 9 / 5) + 32;
-    printf("Temperature in Fahrenheit: %.2lf\n", fahrenheit);
+
+    printf("\n╔════════════════════════════════════════╗\n");
+    printf("║  %.2lf°C = %.2lf°F                     ║\n", celsius, fahrenheit);
+    printf("╚════════════════════════════════════════╝\n");
 }
 
 void fahrenheitToCelsius() 
 {
     double fahrenheit, celsius;
-    printf("Enter temperature in Fahrenheit: ");
+    printf("\nEnter temperature in Fahrenheit: ");
     scanf("%lf", &fahrenheit);
     celsius = (fahrenheit - 32) * 5 / 9;
-    printf("Temperature in Celsius: %.2lf\n", celsius);
+
+    printf("\n╔════════════════════════════════════════╗\n");
+    printf("║  %.2lf°F = %.2lf°C                     ║\n", fahrenheit, celsius);
+    printf("╚════════════════════════════════════════╝\n");
 }
 
 void celsiusToKelvin() 
 {
     double celsius, kelvin;
-    printf("Enter temperature in Celsius: ");
+    printf("\nEnter temperature in Celsius: ");
     scanf("%lf", &celsius);
     kelvin = celsius + 273.15;
-    printf("Temperature in Kelvin: %.2lf\n", kelvin);
+
+    printf("\n╔════════════════════════════════════════╗\n");
+    printf("║  %.2lf°C = %.2lfK                     ║\n", celsius, kelvin);
+    printf("╚════════════════════════════════════════╝\n");
 }
 
 void kelvinToCelsius() 
 {
     double kelvin, celsius;
-    printf("Enter temperature in Kelvin: ");
+    printf("\nEnter temperature in Kelvin: ");
     scanf("%lf", &kelvin);
     celsius = kelvin - 273.15;
-    printf("Temperature in Celsius: %.2lf\n", celsius);
+
+    printf("\n╔════════════════════════════════════════╗\n");
+    printf("║  %.2lfK = %.2lf°C                     ║\n", kelvin, celsius);
+    printf("╚════════════════════════════════════════╝\n");
+}
+
+void showMenu()
+{
+    printf("\n╔════════════ Temperature Converter ═══════════╗\n");
+    printf("║  1. Celsius to Fahrenheit                    ║\n");
+    printf("║  2. Fahrenheit to Celsius                    ║\n");
+    printf("║  3. Celsius to Kelvin                        ║\n");
+    printf("║  4. Kelvin to Celsius                        ║\n");
+    printf("║  5. Exit                                     ║\n");
+    printf("╚══════════════════════════════════════════════╝\n");
+    printf("Enter your choice: ");
 }
 
 int main() 
 {
     int choice;
 
+    printf("╔════════════════════════════════════════════╗\n");
+    printf("║     🌡️ Welcome to Temperature Converter     ║\n");
+    printf("╚════════════════════════════════════════════╝\n");
+
     do 
     {
-        printf("\nTemperature Converter\n");
-        printf("1. Celsius to Fahrenheit\n");
-        printf("2. Fahrenheit to Celsius\n");
-        printf("3. Celsius to Kelvin\n");
-        printf("4. Kelvin to Celsius\n");
-        printf("5. Exit\n");
-        printf("Enter your choice: ");
+        showMenu();
         scanf("%d", &choice);
 
         switch (choice) 
@@ -66,10 +88,12 @@ int main()
                 kelvinToCelsius();
                 break;
             case 5:
-                printf("Exiting the program.\n");
+                printf("\n╔════════════════════════════════════════════╗\n");
+                printf("║      👋 Exiting Temperature Converter      ║\n");
+                printf("╚════════════════════════════════════════════╝\n");
                 break;
             default:
-                printf("Invalid choice. Please try again.\n");
+                printf("\n❌ Invalid choice. Please try again.\n");
         }
     } while (choice != 5);
 
