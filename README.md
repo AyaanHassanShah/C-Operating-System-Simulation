@@ -9,7 +9,6 @@
 
 <p>
   <img src="https://img.shields.io/badge/C-Language-blue?style=for-the-badge&logo=c" />
-  <img src="https://img.shields.io/badge/Shell-Scripts-green?style=for-the-badge&logo=gnu-bash" />
   <img src="https://img.shields.io/badge/Batch-Windows-yellow?style=for-the-badge&logo=windows" />
 </p>
 
