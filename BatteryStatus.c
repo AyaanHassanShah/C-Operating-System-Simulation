@@ -8,15 +8,15 @@ void moveCursor(int x, int y) {
 
 void showBatteryBar(int level) 
 {
-    printf("\n╔══════════ Battery Status ══════════╗\n");
-    printf("║ Level: [");
+    printf("\n+--------------------------------+\n");
+    printf("| Level: [");
     
     int blocks = level / 10;
     for(int i = 0; i < 10; i++) {
-        printf(i < blocks ? "█" : "░");
+        printf(i < blocks ? "#" : "-");
     }
-    printf("] %3d%% ║\n", level);
-    printf("╚═══════════════════════════════════╝\n");
+    printf("] %3d%% |\n", level);
+    printf("+--------------------------------+\n");
 }
 
 int main() 
@@ -41,7 +41,7 @@ int main()
             {
                 showBatteryBar(batteryLevel);
                 printf("\nStatus: %s", 
-                    status.ACLineStatus == 1 ? "🔌 Charging" : "🔋 Battery");
+                    status.ACLineStatus == 1 ? "Charging Mode" : "Not charging");
             }
         }
 
