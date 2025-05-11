@@ -2,23 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
 </head>
 <body>
 
 <h1>💻 OS Simulator - Operating System Project in C</h1>
 
 <p>
-  <img src="https://img.shields.io/badge/Language-C-blue.svg" alt="Language">
-  <img src="https://img.shields.io/badge/Platform-Windows%20CMD-lightgrey.svg" alt="Platform">
-  <img src="https://img.shields.io/badge/License-Educational-informational.svg" alt="License">
+  <img src="https://img.shields.io/badge/C-Language-blue?style=for-the-badge&logo=c" />
+  <img src="https://img.shields.io/badge/Shell-Scripts-green?style=for-the-badge&logo=gnu-bash" />
+  <img src="https://img.shields.io/badge/Batch-Windows-yellow?style=for-the-badge&logo=windows" />
 </p>
-  <strong>OS Simulator</strong> is a terminal-based mini operating system built in C. It demonstrates essential OS concepts such as multitasking, memory management, process creation, and scheduling — using a user-friendly batch interface for preparing the environment.
+
+<p>
+  <strong>OS Simulator</strong> is a terminal-based mini operating system built in <strong>C</strong>. It demonstrates essential OS concepts such as multitasking, memory management, process creation, and scheduling — using a user-friendly batch interface for preparing the environment.
 </p>
 
 <hr>
 
+<h2>📊 GitHub Language Stats</h2>
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AyaanHassanShah&layout=compact&theme=radical&hide=html,css" alt="Top Langs" />
+</p>
+<p align="center">💡 <strong>Note:</strong> GitHub stats may show C++/Shell, but this project is <strong>primarily written in C</strong>. Shell/Batch scripts are used only for automation.</p>
+
+<hr>
+
 <h2>📜 Project Overview</h2>
+<!-- Your original content below remains unchanged -->
 <p>
   The system starts with a boot screen and accepts custom hardware configuration from the user (RAM, Hard Drive, CPU Cores). It then displays a list of available system tasks (like Calculator, Notepad, Snake Game, etc.). Each task runs as a separate process using <code>exec</code>-like behavior, simulating parallel execution and multitasking.
 </p>
@@ -110,7 +120,6 @@ cd &lt;your-folder-name&gt;
   <li>Minimize or close tasks as coded</li>
   <li>Shutdown the OS to exit all running processes</li>
 </ul>
-
 
 <h2>🙌 Credits</h2>
 <ul>
