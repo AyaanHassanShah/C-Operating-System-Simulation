@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <windows.h>  // For Sleep on Windows
 
 #define SIZE 3
 
@@ -20,7 +21,6 @@ void printBoard(char board[SIZE][SIZE])
 
 int checkWinner(char board[SIZE][SIZE]) 
 {
-    // Check rows and columns
     for (int i = 0; i < SIZE; i++) 
     {
         if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ')
@@ -28,12 +28,10 @@ int checkWinner(char board[SIZE][SIZE])
         if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' ')
             return board[0][i];
     }
-    // Check diagonals
     if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ')
         return board[0][0];
     if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ')
         return board[0][2];
-    // No winner
     return 0;
 }
 
@@ -69,7 +67,8 @@ void playGame()
         {
             board[row - 1][col - 1] = currentPlayer;
             winner = checkWinner(board);
-            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+            if (!winner) // Switch only if no win
+                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
         } 
         else 
         {
@@ -86,6 +85,8 @@ void playGame()
     {
         printf("It's a draw!\n");
     }
+
+    Sleep(10000); // 5-second delay before exiting
 }
 
 int main() 
