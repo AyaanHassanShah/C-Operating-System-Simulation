@@ -19,17 +19,24 @@ void Add_Task()
 {
     if (TaskCount >= MAX_TASKS) 
     {
-        printf("Task list is full!\n");
+        printf("+----------------------------------------+\n");
+        printf("|         Task list is full!             |\n");
+        printf("+----------------------------------------+\n");
         return;
     }
 
-    printf("Enter task description: ");
-    getchar(); 
+    printf("+----------------------------------------+\n");
+    printf("|        Enter task description:         |\n");
+    printf("+----------------------------------------+\n");
+    getchar(); // consume leftover newline
     fgets(Tasks[TaskCount].Description, MAX_DESC, stdin);
     Tasks[TaskCount].Description[strcspn(Tasks[TaskCount].Description, "\n")] = '\0';
 
-    printf("Enter reminder time:\n");
     int Year, Month, Day, Hour, Minute;
+    printf("+----------------------------------------+\n");
+    printf("|         Enter reminder time            |\n");
+    printf("+----------------------------------------+\n");
+
     printf("Year (YYYY): ");
     scanf("%d", &Year);
     printf("Month (1-12): ");
@@ -44,7 +51,9 @@ void Add_Task()
     if (Year < 2024 || Month < 1 || Month > 12 || Day < 1 || Day > 31 || 
         Hour < 0 || Hour > 23 || Minute < 0 || Minute > 59) 
     {
-        printf("Invalid date/time values!\n");
+        printf("+----------------------------------------+\n");
+        printf("|         Invalid date/time!             |\n");
+        printf("+----------------------------------------+\n");
         return;
     }
 
@@ -58,21 +67,27 @@ void Add_Task()
 
     Tasks[TaskCount].ReminderTime = mktime(&Time);
     TaskCount++;
-    printf("Task added successfully!\n");
+
+    printf("+----------------------------------------+\n");
+    printf("|         Task added successfully!       |\n");
+    printf("+----------------------------------------+\n");
 }
 
 void View_Tasks() 
 {
+    printf("+----------------------------------------+\n");
     if (TaskCount == 0) 
     {
-        printf("No tasks available.\n");
+        printf("|          No tasks available.           |\n");
+        printf("+----------------------------------------+\n");
         return;
     }
 
-    printf("To-Do List:\n");
+    printf("|              To-Do List                |\n");
+    printf("+----------------------------------------+\n");
     for (int i = 0; i < TaskCount; i++) 
     {
-        printf("%d. %s (Reminder: %s)", 
+        printf("%d. %s\n    Reminder: %s", 
                i + 1, 
                Tasks[i].Description, 
                ctime(&Tasks[i].ReminderTime));
@@ -82,7 +97,9 @@ void View_Tasks()
 void Check_Reminders() 
 {
     time_t Now = time(NULL);
-    printf("Checking reminders...\n");
+    printf("+----------------------------------------+\n");
+    printf("|         Checking reminders...          |\n");
+    printf("+----------------------------------------+\n");
     for (int i = 0; i < TaskCount; i++) 
     {
         if (difftime(Tasks[i].ReminderTime, Now) <= 0) 
@@ -96,16 +113,22 @@ int main()
 {
     int Choice;
 
-    printf("Welcome to the To-Do List!\n");
+    printf("+----------------------------------------+\n");
+    printf("|        Welcome to the To-Do List       |\n");
+    printf("+----------------------------------------+\n");
+
     View_Tasks();
 
     while (1) 
     {
-        printf("\nTo-Do List Menu:\n");
-        printf("1. Add Task\n");
-        printf("2. View Tasks\n");
-        printf("3. Check Reminders\n");
-        printf("4. Exit\n");
+        printf("\n+----------------------------------------+\n");
+        printf("|             To-Do List Menu            |\n");
+        printf("+----------------------------------------+\n");
+        printf("| 1. Add Task                            |\n");
+        printf("| 2. View Tasks                          |\n");
+        printf("| 3. Check Reminders                     |\n");
+        printf("| 4. Exit                                |\n");
+        printf("+----------------------------------------+\n");
         printf("Enter your choice: ");
         scanf("%d", &Choice);
 
@@ -121,10 +144,14 @@ int main()
                 Check_Reminders();
                 break;
             case 4:
-                printf("Exiting...\n");
+                printf("+----------------------------------------+\n");
+                printf("|             Exiting...                 |\n");
+                printf("+----------------------------------------+\n");
                 exit(0);
             default:
-                printf("Invalid choice! Please try again.\n");
+                printf("+----------------------------------------+\n");
+                printf("|        Invalid choice. Try again.      |\n");
+                printf("+----------------------------------------+\n");
         }
     }
 
