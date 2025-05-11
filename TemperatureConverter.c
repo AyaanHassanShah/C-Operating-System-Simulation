@@ -1,58 +1,57 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-void celsiusToFahrenheit() 
-{
-    double celsius, fahrenheit;
-    printf("Enter temperature in Celsius: ");
-    scanf("%lf", &celsius);
-    fahrenheit = (celsius * 9 / 5) + 32;
-    printf("Temperature in Fahrenheit: %.2lf\n", fahrenheit);
+void displayMenu() {
+    printf("\n+--------- Temperature Converter ---------+\n");
+    printf("|  1. Celsius to Fahrenheit   (C to F)   |\n");
+    printf("|  2. Fahrenheit to Celsius   (F to C)   |\n");
+    printf("|  3. Celsius to Kelvin       (C to K)   |\n");
+    printf("|  4. Kelvin to Celsius       (K to C)   |\n");
+    printf("|  5. Exit                               |\n");
+    printf("+-----------------------------------------+\n");
+    printf("Enter your choice: ");
 }
 
-void fahrenheitToCelsius() 
-{
-    double fahrenheit, celsius;
-    printf("Enter temperature in Fahrenheit: ");
-    scanf("%lf", &fahrenheit);
-    celsius = (fahrenheit - 32) * 5 / 9;
-    printf("Temperature in Celsius: %.2lf\n", celsius);
+void celsiusToFahrenheit() {
+    float c, f;
+    printf("Enter temperature in Celsius (C): ");
+    scanf("%f", &c);
+    f = (c * 9 / 5) + 32;
+    printf("Result: %.2f C = %.2f F\n", c, f);
 }
 
-void celsiusToKelvin() 
-{
-    double celsius, kelvin;
-    printf("Enter temperature in Celsius: ");
-    scanf("%lf", &celsius);
-    kelvin = celsius + 273.15;
-    printf("Temperature in Kelvin: %.2lf\n", kelvin);
+void fahrenheitToCelsius() {
+    float f, c;
+    printf("Enter temperature in Fahrenheit (F): ");
+    scanf("%f", &f);
+    c = (f - 32) * 5 / 9;
+    printf("Result: %.2f F = %.2f C\n", f, c);
 }
 
-void kelvinToCelsius() 
-{
-    double kelvin, celsius;
-    printf("Enter temperature in Kelvin: ");
-    scanf("%lf", &kelvin);
-    celsius = kelvin - 273.15;
-    printf("Temperature in Celsius: %.2lf\n", celsius);
+void celsiusToKelvin() {
+    float c, k;
+    printf("Enter temperature in Celsius (C): ");
+    scanf("%f", &c);
+    k = c + 273.15;
+    printf("Result: %.2f C = %.2f K\n", c, k);
 }
 
-int main() 
-{
+void kelvinToCelsius() {
+    float k, c;
+    printf("Enter temperature in Kelvin (K): ");
+    scanf("%f", &k);
+    c = k - 273.15;
+    printf("Result: %.2f K = %.2f C\n", k, c);
+}
+
+int main() {
     int choice;
 
-    do 
-    {
-        printf("\nTemperature Converter\n");
-        printf("1. Celsius to Fahrenheit\n");
-        printf("2. Fahrenheit to Celsius\n");
-        printf("3. Celsius to Kelvin\n");
-        printf("4. Kelvin to Celsius\n");
-        printf("5. Exit\n");
-        printf("Enter your choice: ");
+    while (1) {
+        displayMenu();
         scanf("%d", &choice);
 
-        switch (choice) 
-        {
+        switch (choice) {
             case 1:
                 celsiusToFahrenheit();
                 break;
@@ -66,12 +65,13 @@ int main()
                 kelvinToCelsius();
                 break;
             case 5:
-                printf("Exiting the program.\n");
-                break;
+                printf("Exiting Temperature Converter...\n");
+                 printf("+----------------------------------------+\n");
+                return 0;
             default:
-                printf("Invalid choice. Please try again.\n");
+                printf("Invalid choice! Please try again.\n");
         }
-    } while (choice != 5);
+    }
 
     return 0;
 }
