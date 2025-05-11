@@ -109,9 +109,6 @@ cd &lt;your-folder-name&gt;
   <li>Shutdown the OS to exit all running processes</li>
 </ul>
 
-<h2>📄 Project Report</h2>
-<p>This project follows the Spring 2025 Operating Systems Lab final project requirements.</p>
-<p>See full details in <a href="./OS-Proposal.pdf">OS-Proposal.pdf</a>.</p>
 
 <h2>🙌 Credits</h2>
 <ul>
