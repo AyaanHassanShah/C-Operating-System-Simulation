@@ -11,44 +11,86 @@ void xor_encrypt_decrypt(char* text, char key) {
 int main() {
     char text[100];
     char key;
-    char choice;
+    char guess;
+    int attempts = 3;
+    int correct = 0;
 
-    printf("\n======= XOR Cipher Tool =======\n");
-    printf("---------------------------------\n\n");
+    printf("\n+------- XOR Cipher Guessing Game -------+\n");
+    Sleep(300);
+    printf("|                                        |\n");
 
-    printf("=> Enter Text to Encrypt: ");
+    Sleep(300);
+    printf("| Enter Text to Encrypt:                 |\n");
+    Sleep(300);
+    printf("| ");
     fgets(text, sizeof(text), stdin);
     text[strcspn(text, "\n")] = '\0';
 
-    printf("=> Enter Encryption Key: ");
+    Sleep(300);
+    printf("| Enter Encryption Key:                  |\n");
+    Sleep(300);
+    printf("| ");
     key = getchar();
     while (getchar() != '\n');
 
-    printf("\nProcessing");
+    Sleep(300);
+    printf("|                                        |\n");
+    printf("| Encrypting");
     for(int i = 0; i < 3; i++) {
         printf(".");
-        Sleep(300);
+        Sleep(500);
     }
 
     xor_encrypt_decrypt(text, key);
-    printf("\n\nResult:\n");
-    printf("=> Encrypted text: %s\n\n", text);
+    Sleep(300);
+    printf("\n|                                        |\n");
+    Sleep(300);
+    printf("| Encrypted text: %s\n", text);
+    Sleep(300);
+    printf("|                                        |\n");
 
-    printf("Would you like to Decrypt? (y/n): ");
-    choice = getchar();
+    Sleep(300);
+    printf("| Now try to guess the key to decrypt!   |\n");
+    Sleep(300);
+    printf("| You have 3 attempts.                   |\n");
+    Sleep(300);
+    printf("|                                        |\n");
 
-    if (choice == 'y' || choice == 'Y') {
-        printf("\nDecrypting");
-        for(int i = 0; i < 3; i++) {
-            printf(".");
+    while (attempts > 0 && !correct) {
+        Sleep(300);
+        printf("| Attempts remaining: %d                  |\n", attempts);
+        Sleep(300);
+        printf("| Enter your guess: ");
+        guess = getchar();
+        while (getchar() != '\n');
+
+        if (guess == key) {
+            correct = 1;
             Sleep(300);
+            printf("|                                        |\n");
+            Sleep(300);
+            printf("| Correct guess! Decrypting message...   |\n");
+            Sleep(10000);
+            xor_encrypt_decrypt(text, key);
+            printf("| Decrypted text: %s\n", text);
+        } else {
+            attempts--;
+            Sleep(500);
+            printf("| Wrong guess! Try again.               |\n");
         }
-        xor_encrypt_decrypt(text, key);
-        printf("\n\nResult:\n");
-        printf("=> Decrypted text: %s\n", text);
+        Sleep(300);
+        printf("|                                        |\n");
     }
 
-    printf("\n----------------------\n");
-    printf("Operation completed!\n\n");
+    if (!correct) {
+        Sleep(10000);
+        printf("| Game Over! You couldn't guess the key.   |\n");
+        Sleep(300);
+        printf("| The message remains encrypted.           |\n");
+    }
+
+    Sleep(10000);
+    printf("|                                        |\n");
+    printf("+----------------------------------------+\n");
     return 0;
 }
