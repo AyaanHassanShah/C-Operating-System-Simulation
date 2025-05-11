@@ -22,6 +22,30 @@ void beep() {
     Beep(BEEP_FREQUENCY, BEEP_DURATION);
 }
 
+// Function to bring window to foreground
+void bringToForeground() {
+    HWND hwnd = GetConsoleWindow();
+    if (hwnd) {
+        // Get the current window state
+        WINDOWPLACEMENT wp = {0};
+        wp.length = sizeof(WINDOWPLACEMENT);
+        GetWindowPlacement(hwnd, &wp);
+        
+        // If window is minimized, restore it
+        if (wp.showCmd == SW_SHOWMINIMIZED) {
+            ShowWindow(hwnd, SW_RESTORE);
+        }
+        
+        // Bring window to foreground
+        SetForegroundWindow(hwnd);
+        SetActiveWindow(hwnd);
+        SetFocus(hwnd);
+        
+        // Flash the window to get attention
+        FlashWindow(hwnd, TRUE);
+    }
+}
+
 DWORD WINAPI alarm_thread(LPVOID arg) {
     while (1) {
         WaitForSingleObject(alarmState.mutex, INFINITE);
@@ -33,9 +57,18 @@ DWORD WINAPI alarm_thread(LPVOID arg) {
             if (currentTime->tm_hour == alarmState.hour && 
                 currentTime->tm_min == alarmState.minute) {
                 
-                system("cls");
-                printf("\nALARM TIME: %02d:%02d\n", alarmState.hour, alarmState.minute);
-                printf("Press 'S' to stop or 'Z' to snooze\n");
+                // Bring window to foreground when alarm rings
+                bringToForeground();
+                
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                CONSOLE_SCREEN_BUFFER_INFO csbi;
+                GetConsoleScreenBufferInfo(hConsole, &csbi);
+                
+                printf("\n\n+-------- ALARM! --------+\n");
+                printf("| Time: %02d:%02d           |\n", alarmState.hour, alarmState.minute);
+                printf("| S - Stop, Z - Snooze   |\n");
+                printf("+----------------------+\n");
+                
                 ReleaseMutex(alarmState.mutex);
 
                 while (1) {
@@ -43,16 +76,18 @@ DWORD WINAPI alarm_thread(LPVOID arg) {
                     if (_kbhit()) {
                         char choice = _getch();
                         if (choice == 's' || choice == 'S') {
-                            printf("\nAlarm stopped!\n");
                             alarmState.isActive = 0;
+                            printf("\nAlarm stopped!\n");
+                            Sleep(1000);
                             return 0;
                         }
                         if (choice == 'z' || choice == 'Z') {
-                            printf("\nSnoozing for %d minutes...\n", SNOOZE_MINUTES);
                             alarmState.minute = (alarmState.minute + SNOOZE_MINUTES) % 60;
                             if (alarmState.minute < SNOOZE_MINUTES) {
                                 alarmState.hour = (alarmState.hour + 1) % 24;
                             }
+                            printf("\nSnoozing for %d minutes...\n", SNOOZE_MINUTES);
+                            Sleep(1000);
                             break;
                         }
                     }
@@ -61,7 +96,6 @@ DWORD WINAPI alarm_thread(LPVOID arg) {
                 continue;
             }
         }
-        
         ReleaseMutex(alarmState.mutex);
         Sleep(1000);
     }
@@ -82,15 +116,29 @@ void setAlarm(int hour, int minute) {
     }
 
     printf("Alarm set for %02d:%02d\n", hour, minute);
-    printf("Alarm is running in background. You can continue with other tasks.\n");
+    printf("Press ESC to exit the alarm program.\n");
     
-    // Wait for alarm thread to finish
+    // Keep the main thread running
+    while (1) {
+        if (_kbhit() && _getch() == 27) { // ESC key
+            break;
+        }
+        Sleep(100);
+    }
+    
+    // Clean up
+    WaitForSingleObject(alarmState.mutex, INFINITE);
+    alarmState.isActive = 0;
+    ReleaseMutex(alarmState.mutex);
+    
     WaitForSingleObject(hThread, INFINITE);
     CloseHandle(hThread);
 }
 
 int main() {
-    // Initialize mutex
+    // Set console title to make it easier to find the window
+    SetConsoleTitle("Alarm Clock");
+    
     alarmState.mutex = CreateMutex(NULL, FALSE, NULL);
     if (alarmState.mutex == NULL) {
         printf("Failed to create mutex!\n");
@@ -106,11 +154,10 @@ int main() {
         CloseHandle(alarmState.mutex);
         return 1;
     }
-    while (getchar() != '\n');  // Clear input buffer
+    while (getchar() != '\n');
 
     setAlarm(hour, minute);
     
-    // Cleanup
     CloseHandle(alarmState.mutex);
     return 0;
 }
