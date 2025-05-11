@@ -29,11 +29,11 @@ void calculateResults(const char* sample, const char* typed, clock_t start, cloc
     double wpm = ((double)correctChars / WPM_WORD_LENGTH) / (timeTaken / 60.0);
     
     // Display results with proper formatting
-    printf("\n╔═══════════ Results ═══════════╗\n");
-    printf("║ Time:     %6.1f seconds     ║\n", timeTaken);
-    printf("║ Accuracy: %6.1f%%           ║\n", accuracy);
-    printf("║ Speed:    %6.1f WPM        ║\n", wpm);
-    printf("╚════════════════════════════════╝\n\n");
+    printf("\n+-----------Results ----------+\n");
+    printf("- Time:     %6.1f seconds    -+\n", timeTaken);
+    printf("- Accuracy:  %6.1f%%           -+\n", accuracy);
+    printf("- Speed:    %6.1f WPM       -+\n", wpm);
+    printf("+------------------------------+\n\n");
 }
 
 int main() {
