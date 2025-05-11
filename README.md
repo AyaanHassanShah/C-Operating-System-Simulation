@@ -8,9 +8,11 @@
 
 <h1>💻 OS Simulator - Operating System Project in C</h1>
 
-<p><img src="https://img.shields.io/badge/Language-C-blue.svg" alt="Language"></p>
-
 <p>
+  <img src="https://img.shields.io/badge/Language-C-blue.svg" alt="Language">
+  <img src="https://img.shields.io/badge/Platform-Windows%20CMD-lightgrey.svg" alt="Platform">
+  <img src="https://img.shields.io/badge/License-Educational-informational.svg" alt="License">
+</p>
   <strong>OS Simulator</strong> is a terminal-based mini operating system built in C. It demonstrates essential OS concepts such as multitasking, memory management, process creation, and scheduling — using a user-friendly batch interface for preparing the environment.
 </p>
 
