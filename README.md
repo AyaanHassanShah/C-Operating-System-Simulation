@@ -18,13 +18,6 @@
 
 <hr>
 
-<h2>📊 GitHub Language Stats</h2>
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AyaanHassanShah&layout=compact&theme=radical&hide=html,css" alt="Top Langs" />
-</p>
-<p align="center">💡 <strong>Note:</strong> GitHub stats may show C++/Shell, but this project is <strong>primarily written in C</strong>. Shell/Batch scripts are used only for automation.</p>
-
-<hr>
 
 <h2>📜 Project Overview</h2>
 <!-- Your original content below remains unchanged -->
