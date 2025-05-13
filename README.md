@@ -18,9 +18,7 @@
 
 <hr>
 
-
 <h2>📜 Project Overview</h2>
-<!-- Your original content below remains unchanged -->
 <p>
   The system starts with a boot screen and accepts custom hardware configuration from the user (RAM, Hard Drive, CPU Cores). It then displays a list of available system tasks (like Calculator, Notepad, Snake Game, etc.). Each task runs as a separate process using <code>exec</code>-like behavior, simulating parallel execution and multitasking.
 </p>
@@ -70,29 +68,22 @@
 
 <h2>🛠️ Getting Started</h2>
 
-<h3>1. Clone the Repository</h3>
-<pre><code>git clone https://github.com/your-username/&lt;your-folder-name&gt;.git
-cd &lt;your-folder-name&gt;
+<h3>1. Download the Repository</h3>
+<pre><code>git clone https://github.com/your-username/your-folder-name.git
+cd your-folder-name
 </code></pre>
 
-<h3>2. Compile the Tasks (If Not Precompiled)</h3>
-<p>Use this command for each task:</p>
-<pre><code>gcc TaskName.c -o TaskName.exe</code></pre>
-
-<h3>3. Setup Environment Using the Batch File</h3>
-<p>Run the batch script to build and prepare everything:</p>
+<h3>2. Setup Environment</h3>
+<p>Simply run the batch script to compile and set up everything:</p>
 <ul>
   <li>Via terminal:
     <pre><code>start build_all.bat</code></pre>
   </li>
-  <li>Or double-click on <strong>build_all.bat</strong> from your folder</li>
+  <li>Or double-click on <strong>build_all.bat</strong> from the project folder</li>
 </ul>
 
-<h3>4. Manually Launch the OS</h3>
-<p>
-  After the environment is set up, <strong>you must manually run the OS executable</strong>:
-</p>
-<pre><code>bin\foldername.exe</code></pre>
+<h3>3. Launch the OS</h3>
+<pre><code>bin\your-folder-name.exe</code></pre>
 
 <p>This will:</p>
 <ul>
@@ -101,16 +92,16 @@ cd &lt;your-folder-name&gt;
   <li>Allow launching and managing tasks in separate terminals</li>
 </ul>
 
-<blockquote><strong>💡 Note:</strong> Replace <code>&lt;your-folder-name&gt;</code> with your actual folder name. Keep <code>foldername.exe</code> inside the <code>bin</code> directory.</blockquote>
+<blockquote><strong>💡 Note:</strong> Replace <code>your-folder-name</code> with the actual folder name. Ensure the main executable is placed inside the <code>bin</code> directory.</blockquote>
 
 <h2>📚 Usage Instructions</h2>
 <ul>
-  <li>Run <code>build_all.bat</code> to initialize the environment</li>
-  <li>Then manually launch the OS: <code>bin\foldername.exe</code></li>
-  <li>Use the interface to launch tasks (apps, games, tools)</li>
-  <li>Each task opens in its own terminal (process)</li>
-  <li>Minimize or close tasks as coded</li>
-  <li>Shutdown the OS to exit all running processes</li>
+  <li>Run <code>build_all.bat</code> to compile all tasks and set up the environment</li>
+  <li>Launch the main OS executable: <code>bin\your-folder-name.exe</code></li>
+  <li>Use the on-screen interface to launch tasks (apps, games, tools)</li>
+  <li>Each task opens in a new terminal window (separate process)</li>
+  <li>Minimize or close tasks as required</li>
+  <li>Shutdown the OS from the interface to terminate all processes</li>
 </ul>
 
 <h2>🙌 Credits</h2>
